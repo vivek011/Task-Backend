@@ -11,7 +11,10 @@ var _ = require('underscore')
 var https = require('https');
 
 
-var test = require('./routes/test.js');
+
+var employee = require('./routes/employee.js');
+
+
 
 app.use(bodyParser.json({
     limit: "50mb"
@@ -20,7 +23,7 @@ app.use(bodyParser.json({
 
 //DB connection
 mongoose.Promise = global.Promise;
-var url='mongodb://localhost:27017/task';
+var url='mongodb://localhost:27017/employee';
 mongoose.connect(url, {
     useNewUrlParser: true,
     useFindAndModify:false
@@ -41,17 +44,20 @@ app.use(cookieParser());
 
 
 //route
-//app.use('/api/v1.0/test',test);
+app.use('/employee',employee);
 
 
 
 
-app.listen(8000, () => console.log('App listening on port 4011!'))
+app.listen(8000, () => console.log('App listening on port 8000!'))
 // https.createServer({
 //   key: fs.readFileSync('server.key'),
 //   cert: fs.readFileSync('server.cert')
 // }, app).listen(8000, () => {
 //   console.log('Listening........')
 // })
+
+
+
 
 module.exports = app;
